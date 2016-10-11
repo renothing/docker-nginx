@@ -1,0 +1,24 @@
+server {
+ listen       80;
+ server_name  localhost default_server;
+ root   /var/www;
+ index  index.html index.htm index.php;
+ include conf.d/open_cache.conf;
+
+ #error_page  404              /404.html;
+ # redirect server error pages to the static page /50x.html
+ #error_page   500 502 503 504  /50x.html;
+
+ #enable php
+ #include conf.d/php.conf;
+ #no log notfound
+ include conf.d/no_log_static.conf;
+ location / {
+  #for dedicated server and upstream
+  #proxy_set_header Host $host;
+  #for virtual host
+  #proxy_set_header Host $proxy_host;
+  proxy_hide_header Vary;
+  proxy_hide_header X-Powered-By;
+ }
+}
