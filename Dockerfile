@@ -20,6 +20,7 @@ WORKDIR /var/www
 # Expose volumes
 #VOLUME ["/var/www"]
 # Entry point
-ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]
+ENTRYPOINT ["/usr/sbin/nginx"]
+CMD ["-g","daemon off;"]
 # Expose ports
 EXPOSE 80
