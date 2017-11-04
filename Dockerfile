@@ -1,6 +1,6 @@
 FROM alpine
 MAINTAINER renothing 'frankdot@qq.com'
-LABEL role='nginx' version='1.10.1' tags='nginx,loadblancer' description='nginx based on alpine'
+LABEL role='nginx' version='1.12.2' tags='nginx,loadblancer' description='nginx based on alpine'
 #set language enviroments
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     TIMEZONE=Asia/Shanghai
@@ -11,7 +11,6 @@ RUN apk update && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
    # Cleaning up
-    apk del tzdata && \
     rm -rf /var/cache/apk/*
 #set ngx config
 COPY nginx /etc/nginx
