@@ -1,6 +1,8 @@
+#define your upstreams here
+#include pool.d/php-fpm-cluster.conf;
 server {
- listen       80;
- server_name  localhost default_server;
+ listen       80 default_server;
+ server_name  _;
  root   /var/www;
  index  index.html index.htm index.php;
  include conf.d/open_cache.conf;
