@@ -5,8 +5,8 @@ LABEL role='nginx' tags='nginx,loadblancer' description='nginx based on alpine'
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     TIMEZONE=Asia/Shanghai
 #install software
-#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk update && \
-RUN apk update && \
+#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk upgrade --update && \
+RUN apk upgrade --update && \
     apk add nginx tzdata && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
