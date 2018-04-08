@@ -35,13 +35,12 @@ server {
  #error_page   500 502 503 504  /50x.html;
 
  #enable php
-#location ~ .*\.(php|php5)?$ {
+#location ~* \.php(\?|/)*$ {
 # fastcgi_pass  default_fpm_cluster;
 # fastcgi_keep_conn on;
 # fastcgi_index  index.php;
 # include        fastcgi.conf;
 # fastcgi_split_path_info ^(.+\.php)(.*)$;
-# try_files $uri =404;
 #}
 #location ~ ^/(pstatus|pping)$ {
 # access_log off;
