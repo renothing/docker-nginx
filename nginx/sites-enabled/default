@@ -51,15 +51,16 @@ server {
 # fastcgi_pass default_fpm_cluster;
 #}
 
- #no log notfound
- include conf.d/no_log_static.conf;
  location / {
+  #no log notfound
+  include conf.d/no_log_static.conf;
   #for dedicated server and upstream
   #proxy_set_header Host $host;
   #for virtual host
   #proxy_set_header Host $proxy_host;
   #enable websocket
   #include conf.d/wsocket.conf;
+  #include conf.d/proxy.conf;
   proxy_hide_header Vary;
   proxy_hide_header X-Powered-By;
  }
