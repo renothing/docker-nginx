@@ -55,9 +55,9 @@ server {
   #no log notfound
   include conf.d/no_log_static.conf;
   #for dedicated server and upstream
-  #proxy_set_header Host $host;
+  #proxy_set_header Host $host:$proxy_port;
   #for virtual host
-  #proxy_set_header Host $proxy_host;
+  #proxy_set_header Host $proxy_host:$proxy_port;
   #enable websocket
   #include conf.d/wsocket.conf;
   #include conf.d/proxy.conf;
