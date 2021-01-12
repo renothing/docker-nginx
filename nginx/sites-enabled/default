@@ -64,6 +64,7 @@ server {
   #include conf.d/wsocket.conf;
   #include conf.d/proxy.conf;
   #include conf.d/proxyssl.conf;
+  #include conf.d/realip.conf;
   #only enable on proxy close to users, else set as previous proxy remote_addr
   #proxy_set_header X-Real-IP $remote_addr;
   #real_ip_header X-Forwarded-For;
