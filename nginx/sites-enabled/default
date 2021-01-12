@@ -14,6 +14,7 @@ server {
  root   /var/www;
  index  index.html index.htm index.php;
  include conf.d/open_cache.conf;
+#include conf.d/xss.conf;
 
  #ssl
 #listen 443 ssl http2 reuseport so_keepalive=on fastopen=4;
