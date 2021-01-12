@@ -1,0 +1,15 @@
+#run as a sni proxy server
+#map $ssl_preread_server_name $backend {
+#    default $ssl_preread_server_name;
+#    .example.com 10.1.1.2;
+#}
+#server {
+#    listen 443 reuseport so_keepalive=30m::10;
+#    tcp_nodelay on;
+#    proxy_connect_timeout 6s;
+#    proxy_timeout 900s;
+#    resolver 8.8.8.8 8.8.4.4 valid=60s ipv6=off;
+#
+#    proxy_pass $backend:443;
+#    ssl_preread on;
+#}
