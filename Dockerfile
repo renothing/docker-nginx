@@ -15,10 +15,10 @@ RUN apk upgrade --update && \
 COPY nginx /etc/nginx
 # Set Workdir
 WORKDIR /var/www
-# Expose volumes
-#VOLUME ["/var/www"]
 # Entry point
 ENTRYPOINT ["/usr/sbin/nginx"]
 CMD ["-g","daemon off;"]
 # Expose ports
 EXPOSE 80
+# Expose volumes
+VOLUME ["/etc/nginx","/var/www"]
