@@ -18,20 +18,11 @@ server {
 
  #ssl
 #listen 443 ssl http2 reuseport so_keepalive=on fastopen=4;
-# listen [::]:443 ssl http2 reuseport so_keepalive=on fastopen=4;
+#listen [::]:443 ssl http2 reuseport so_keepalive=on fastopen=4;
 #ssl_certificate ssl.d/your.fullchain1.pem;
 #ssl_certificate_key ssl.d/your.privkey1.pem;
 #ssl_dhparam ssl.d/your.dhparam.pem;
-#ssl_session_timeout 1d;
-#ssl_session_cache shared:SSL:50m;
-
-#####ref:https://www.openssl.org/docs/manmaster/man1/ciphers.html
-#####The TLSv1.3 parameter (1.13.0) works only when OpenSSL 1.1.1 built with TLSv1.3 support is used.
-#####The TLSv1.1 and TLSv1.2 parameters (1.1.13, 1.0.12) work only when OpenSSL 1.0.1 or higher is used.
-#ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
-#ssl_ciphers 'ALL:!aNULL:!eNULL:!DES:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS';
-#ssl_prefer_server_ciphers on;
-
+#include conf.d/ssl.conf
 
  #error_page  404              /404.html;
  # redirect server error pages to the static page /50x.html
