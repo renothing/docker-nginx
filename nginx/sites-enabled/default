@@ -6,6 +6,8 @@
 # server 127.0.1.1:9000 max_fails=5 weight=3;
 # keepalive 25;
 #}
+#fastcgi_cache_path /dev/shm/fcache levels=1:2 use_temp_path=on keys_zone=fcache:10m inactive=5m max_size=100m;
+#proxy_cache_path /dev/shm/pcache levels=1:2 use_temp_path=on keys_zone=pcache:10m inactive=5m max_size=100m;
 #vhost settings
 server {
  listen 80 default_server reuseport so_keepalive=on fastopen=4;
@@ -14,7 +16,8 @@ server {
  root   /var/www;
  index  index.html index.htm index.php;
  include conf.d/open_cache.conf;
-#include conf.d/xss.conf;
+ include conf.d/cacheset.conf;
+ include conf.d/xss.conf;
 
  #ssl
 #listen 443 ssl http2 reuseport so_keepalive=on fastopen=4;
@@ -27,22 +30,27 @@ server {
  #error_page  404              /404.html;
  # redirect server error pages to the static page /50x.html
  #error_page   500 502 503 504  /50x.html;
-
  #enable php
-#location ~* \.php(\?|/)*$ {
-# fastcgi_pass  default_fpm_cluster;
-# fastcgi_keep_conn on;
+#location ~ [^/]\.php(/|$) {
 # fastcgi_index  index.php;
-# include        fastcgi.conf;
-# fastcgi_split_path_info ^(.+\.php)(.*)$;
+# include fastcgi.conf;
+# include conf.d/fastcgi_conf.conf;
+# include conf.d/fastcgi_cache.conf;
+# fastcgi_split_path_info ^(.+\.php)(/.+)$;
+# fastcgi_param PATH_INFO $fastcgi_path_info;
+# fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+# fastcgi_cache_key "localhost:9000$request_uri";
+##fastcgi_cache fcache;
+# fastcgi_pass  localhost:9000;
 #}
 #location ~ ^/(pstatus|pping)$ {
 # access_log off;
+# include fastcgi.conf;
+# include conf.d/fastcgi_conf.conf;
 # #allow 127.0.0.1;
 # #allow 1.2.3.4#your-ip;
 # #deny all;
-# include fastcgi.conf;
-# fastcgi_pass default_fpm_cluster;
+# fastcgi_pass localhost:9000;
 #}
 
  location / {
@@ -56,6 +64,9 @@ server {
   #include conf.d/wsocket.conf;
   #include conf.d/proxy.conf;
   #include conf.d/proxyssl.conf;
+  #include conf.d/proxy_cache.conf;
+  #proxy_cache_key "$proxy_host$uri$is_args$args";
+  #proxy_cache pcache;
   #include conf.d/realip.conf;
   #only enable on proxy close to users, else set as previous proxy remote_addr
   #proxy_set_header X-Real-IP $remote_addr;
