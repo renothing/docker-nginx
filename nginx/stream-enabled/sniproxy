@@ -8,6 +8,8 @@
 #    tcp_nodelay on;
 #    proxy_connect_timeout 6s;
 #    proxy_timeout 900s;
+#    proxy_next_upstream_timeout 300s;
+#    proxy_socket_keepalive on;
 #    resolver 8.8.8.8 8.8.4.4 valid=60s ipv6=off;
 #
 #    proxy_pass $backend:443;
