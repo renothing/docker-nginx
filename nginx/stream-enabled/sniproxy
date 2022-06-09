@@ -12,5 +12,6 @@
 #
 #    proxy_pass $backend:443;
 #    proxy_ssl_server_name on;
+#    #Enables extracting information from the ClientHello message at the preread phase.
 #    ssl_preread on;
 #}
