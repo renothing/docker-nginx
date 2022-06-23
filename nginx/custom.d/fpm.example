@@ -1,0 +1,8 @@
+upstream fpmcluster {
+ #hash $request_uri consistent;
+ least_conn;
+ server php-fpm:9000 weight=3;
+ keepalive 25;
+}
+# cache settings
+fastcgi_cache_path /dev/shm/fcache levels=1:2 use_temp_path=on keys_zone=fcache:10m inactive=5m max_size=2g;

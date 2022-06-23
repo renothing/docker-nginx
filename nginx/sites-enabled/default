@@ -29,28 +29,10 @@ server {
  #error_page  404              /404.html;
  # redirect server error pages to the static page /50x.html
  #error_page   500 502 503 504  /50x.html;
+ #access_log /dev/stdout main if=$loggable;
+ 
  #enable php
-#location ~ [^/]\.php(/|$) {
-# fastcgi_index  index.php;
-# include fastcgi.conf;
-# include conf.d/fastcgi_conf.conf;
-# include conf.d/fastcgi_cache.conf;
-# fastcgi_split_path_info ^(.+\.php)(/.+)$;
-# fastcgi_param PATH_INFO $fastcgi_path_info;
-# fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-# fastcgi_cache_key "localhost:9000$request_uri";
-##fastcgi_cache fcache;
-# fastcgi_pass  localhost:9000;
-#}
-#location ~ ^/(pstatus|pping)$ {
-# access_log off;
-# include fastcgi.conf;
-# include conf.d/fastcgi_conf.conf;
-# #allow 127.0.0.1;
-# #allow 1.2.3.4#your-ip;
-# #deny all;
-# fastcgi_pass localhost:9000;
-#}
+ #include custom.d/php.example;
 
  location / {
   #no log notfound

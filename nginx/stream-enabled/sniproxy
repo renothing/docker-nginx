@@ -16,4 +16,6 @@
 #    proxy_ssl_server_name on;
 #    #Enables extracting information from the ClientHello message at the preread phase.
 #    ssl_preread on;
+#    open_log_file_cache max=1000 inactive=20s valid=1m min_uses=2;
+#    access_log /dev/stdout logstream buffer=512 flush=5m if=$loggable;
 #}
