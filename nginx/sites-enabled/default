@@ -50,6 +50,8 @@ server {
   #include conf.d/proxy_cache.conf;
   #proxy_cache_key "$proxy_host$uri$is_args$args";
   #proxy_cache pcache;
+  #slice 1m;
+  #proxy_set_header   Range $slice_range;
   #include conf.d/realip.conf;
   #only enable on proxy close to users, else set as previous proxy remote_addr
   #proxy_set_header X-Real-IP $remote_addr;
