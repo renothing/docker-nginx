@@ -21,6 +21,7 @@ server {
 
  #ssl
 #listen 443 ssl http2 reuseport so_keepalive=on fastopen=4 deferred;
+#ssl_reject_handshake on; #only available bellow 1.19.4+
 #Since version 1.15.9, variables can be used in the file name when using OpenSSL 1.0.2 or higher:
 #Note that using variables implies that a certificate will be loaded for each SSL handshake, and this may have a negative impact on performance.
 #ssl_certificate ssl.d/your.fullchain1.pem;
@@ -47,6 +48,7 @@ server {
   #include conf.d/wsocket.conf;
   #include conf.d/proxy.conf;
   #include conf.d/proxyssl.conf;
+  #proxy_ssl_name $proxy_host;
   #include conf.d/proxy_cache.conf;
   #proxy_cache_key "$proxy_host$uri$is_args$args";
   #proxy_cache pcache;
