@@ -18,9 +18,13 @@ server {
  include conf.d/cacheset.conf;
  include conf.d/xss.conf;
 #include conf.d/forcessl.conf;
+ include conf.d/denyhiden.conf;
+ include conf.d/no_log_404.conf;
+ include conf.d/cachestatic.conf;
 
  #ssl
-#listen 443 ssl http2 reuseport so_keepalive=on fastopen=4 deferred;
+ listen 443 ssl http2 reuseport so_keepalive=on fastopen=4 deferred;
+ ssl_reject_handshake on;
 #ssl_reject_handshake on; #only available bellow 1.19.4+
 #Since version 1.15.9, variables can be used in the file name when using OpenSSL 1.0.2 or higher:
 #Note that using variables implies that a certificate will be loaded for each SSL handshake, and this may have a negative impact on performance.
@@ -38,8 +42,6 @@ server {
  #include custom.d/php.example;
 
  location / {
-  #no log notfound
-  include conf.d/no_log_static.conf;
   #for dedicated server and upstream
   #proxy_set_header Host $http_host;
   #for virtual host
