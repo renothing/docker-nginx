@@ -7,7 +7,7 @@
 # keepalive 25;
 #}
 #fastcgi_cache_path /dev/shm/fcache levels=1:2 use_temp_path=on keys_zone=fcache:10m inactive=5m max_size=100m;
-#proxy_cache_path /dev/shm/pcache levels=1:2 use_temp_path=on keys_zone=pcache:10m inactive=5m max_size=100m;
+#proxy_cache_path /dev/shm/pcache levels=1:2 use_temp_path=on keys_zone=pcache:10m inactive=7d max_size=1g;
 #vhost settings
 server {
  listen 80 default_server reuseport so_keepalive=on fastopen=4 deferred;
@@ -52,10 +52,8 @@ server {
   #include conf.d/proxyssl.conf;
   #proxy_ssl_name $proxy_host;
   #include conf.d/proxy_cache.conf;
-  #proxy_cache_key "$proxy_host$uri$is_args$args";
+  #proxy_cache_key "$http_host$uri$is_args$args";
   #proxy_cache pcache;
-  #slice 1m;
-  #proxy_set_header   Range $slice_range;
   #include conf.d/realip.conf;
   #only enable on proxy close to users, else set as previous proxy remote_addr
   #proxy_set_header X-Real-IP $remote_addr;
