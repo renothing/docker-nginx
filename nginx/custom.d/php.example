@@ -9,6 +9,7 @@ location ~ [^/]\.php(/|$) {
  fastcgi_param PHP_VALUE "open_basedir=$document_root:/tmp/";
  fastcgi_cache_key "$http_host$uri$is_args$args";
  fastcgi_cache fcache;
+ fastcgi_cache_purge PURGE from 127.0.0.0/8;
  fastcgi_pass  fpmcluster;
  fastcgi_index  index.php;
  try_files $uri =404;
