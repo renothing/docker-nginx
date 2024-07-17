@@ -23,7 +23,7 @@ server {
  include conf.d/cachestatic.conf;
 
  #ssl
- listen 443 ssl reuseport so_keepalive=on fastopen=4 deferred;
+#listen 443 default_server ssl reuseport so_keepalive=on fastopen=4 deferred;
 #include conf.d/http2.conf;
  #enable http3
 #listen 443 quic reuseport;

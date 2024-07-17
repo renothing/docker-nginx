@@ -4,7 +4,7 @@
 #    default $ssl_preread_server_name;
 #}
 #server {
-#    listen 443 reuseport so_keepalive=30m::10;
+#    listen 443 default_server fastopen=4 deferred reuseport so_keepalive=30m::10;
 #    tcp_nodelay on;
 #    proxy_connect_timeout 6s;
 #    proxy_timeout 900s;
