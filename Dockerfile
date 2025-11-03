@@ -6,8 +6,8 @@ ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 #install software
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk upgrade --update && \
 RUN apk upgrade --update && \
-    apk add tzdata openssl curl ca-certificates nginx nginx-mod-stream nginx-mod-http-echo \
-    nginx-mod-http-cache-purge nginx-mod-http-brotli && \
+    apk add tzdata openssl curl ca-certificates nginx nginx-mod-dynamic-upstream nginx-mod-stream nginx-mod-http-echo \
+    nginx-mod-http-cache-purge nginx-mod-http-brotli nginx-mod-http-vod nginx-mod-http-vts nginx-mod-rtmp && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
    # Cleaning up

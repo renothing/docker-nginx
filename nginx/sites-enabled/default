@@ -4,7 +4,10 @@
 # server 127.0.0.1:9000 max_fails=10 fail_timeout=60s weight=5;
 # server 127.0.0.2:9000 max_fails=5 weight=5;
 # server 127.0.1.1:9000 max_fails=5 weight=3;
+# server www.exmaple.com:8000 max_fails=5 backup resolve; #Prior to version 1.27.3, resolve parameter was available only as part of our commercial subscription. resolver directive must be specified in the http or upstream block;
 # keepalive 25;
+# resolver 127.0.0.1 [::1]:5353 valid=30s; #Since version 1.17.5 and prior to version 1.27.3, this directive was available only as part of our commercial subscription.
+# resolver_timeout 5s;
 #}
 #fastcgi_cache_path /dev/shm/fcache levels=1:2 use_temp_path=on keys_zone=fcache:10m inactive=5m max_size=100m;
 #proxy_cache_path /dev/shm/pcache levels=1:2 use_temp_path=on keys_zone=pcache:10m inactive=7d max_size=1g;
@@ -34,6 +37,8 @@ server {
 #Note that using variables implies that a certificate will be loaded for each SSL handshake, and this may have a negative impact on performance.
 #ssl_certificate ssl.d/your.fullchain1.pem;
 #ssl_certificate_key ssl.d/your.privkey1.pem;
+#ssl_certificate_cache max=1000 inactive=20s valid=1m; #This directive appeared in version 1.27.4.
+#ssl_certificate_compression on; #This directive appeared in version 1.29.1.
 #ssl_dhparam ssl.d/your.dhparam.pem;
 #include conf.d/ssl.conf
 
