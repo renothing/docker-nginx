@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.23
 LABEL role='nginx' tags='nginx,loadblancer' description='nginx based on alpine'
 #set language enviroments
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
