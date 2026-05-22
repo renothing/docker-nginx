@@ -31,6 +31,7 @@ server {
  #enable http3
 #listen 443 quic reuseport;
 #include conf.d/http3.conf;
+ early_hints $http2$http3; #核心配置：仅对使用 http2 或 http3 的客户端代理 Early Hints,当变量匹配且不为 0 或空字符串时生效
  ssl_reject_handshake on;
 #ssl_reject_handshake on; #only available bellow 1.19.4+
 #Since version 1.15.9, variables can be used in the file name when using OpenSSL 1.0.2 or higher:
@@ -38,7 +39,7 @@ server {
 #ssl_certificate ssl.d/your.fullchain1.pem;
 #ssl_certificate_key ssl.d/your.privkey1.pem;
 #ssl_certificate_cache max=1000 inactive=20s valid=1m; #This directive appeared in version 1.27.4.
-#ssl_certificate_compression on; #This directive appeared in version 1.29.1.
+#ssl_certificate_compression on; #This directive appeared in version 1.29.1 and only works for OpenSSL 3.2 or higher
 #ssl_dhparam ssl.d/your.dhparam.pem;
 #include conf.d/ssl.conf
 
@@ -60,6 +61,7 @@ server {
   #include conf.d/proxy.conf;
   #include conf.d/proxyssl.conf;
   #proxy_ssl_name $proxy_host;
+  #proxy_pass_header Link; #确保后端发送的 Link 头和 103 响应可以顺利通过
   #include conf.d/proxy_cache.conf;
   #proxy_cache_key "$http_host$uri$is_args$args";
   #proxy_cache pcache;
