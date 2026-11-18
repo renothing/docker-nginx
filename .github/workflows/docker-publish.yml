@@ -53,7 +53,7 @@ jobs:
         with:
           images: |
             docker.io/renothing/nginx
-            ghcr.io/${{ github.repository }}
+            ghcr.io/renothing/nginx
           flavor: |
             latest=true
           tags: |
